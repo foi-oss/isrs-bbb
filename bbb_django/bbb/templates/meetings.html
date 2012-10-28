@@ -9,7 +9,7 @@
     {% for meeting in meetings %}
         <li>{{ meeting.name }} <a class="more-info">view details</a>
             <span class="right">
-            {% if meeting.info.end_time == "null" %}
+            {% if meeting.info.end_time == "0" %}
             {% if meeting.running == 'true'  %}
                 <span class="status running">Running</span>
             {% else %}

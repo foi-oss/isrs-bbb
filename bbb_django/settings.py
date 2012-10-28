@@ -11,7 +11,7 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'bbb_django',                      # Or path to database file if using sqlite3.
         'USER': 'bbb_django',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
@@ -54,15 +54,15 @@ MIDDLEWARE_CLASSES = (
 )
 
 AUTHENTICATION_BACKENDS = (
-    'django_auth_ldap.backend.LDAPBackend',
+#    'django_auth_ldap.backend.LDAPBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
 LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/'
 
-SALT = ""
-BBB_API_URL = "http://yourdomain.com/bigbluebutton/api/"
+SALT = "ce5f0eb800d3ffe81e4ea86a696692f1"
+BBB_API_URL = "http://yourhost/bigbluebutton/api/"
 
 ROOT_URLCONF = 'bbb.urls'
 
@@ -80,5 +80,5 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'bbb',
-    'gunicorn',
+    #'gunicorn',
 )
