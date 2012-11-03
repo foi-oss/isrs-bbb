@@ -112,6 +112,7 @@ class Meeting(models.Model):
                         meeting_id,
                         password)
                 })
+                print d
             return d
         else:
             return 'error'
@@ -129,6 +130,7 @@ class Meeting(models.Model):
         ))
         hashed = self.api_call(query, call)
         url = settings.BBB_API_URL + call + '?' + hashed
+        print url
         result = parse(urlopen(url).read())
         if result:
             return result

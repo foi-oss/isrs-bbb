@@ -93,6 +93,12 @@ def create_meeting(request):
             meeting.attendee_password = data.get('attendee_password')
             meeting.moderator_password = data.get('moderator_password')
             meeting.meeting_id = data.get('meeting_id')
+            url = meeting.start()
+            meeting.save()
+            msg = 'Successfully created meeting %s' % meeting.meeting_id
+            messages.success(request, msg)
+            return HttpResponseRedirect(reverse('meetings'))
+            '''
             try:
                 url = meeting.start()
                 meeting.save()
@@ -103,7 +109,7 @@ def create_meeting(request):
                 return HttpResponse("An error occureed whilst creating the " \
                                     "meeting. The meeting has probably been "
                                     "deleted recently but is still running.")
-
+            '''
     else:
         form = form_class()
 

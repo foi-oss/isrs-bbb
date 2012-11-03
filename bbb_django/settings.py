@@ -4,6 +4,8 @@ import os
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
+
 ADMINS = (
 )
 
@@ -12,7 +14,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'bbb_django',                      # Or path to database file if using sqlite3.
+        'NAME': os.path.join(PROJECT_ROOT,'bbb_django'),                      # Or path to database file if using sqlite3.
         'USER': 'bbb_django',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -33,8 +35,33 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = True
 
-MEDIA_ROOT = ''
-MEDIA_URL = ''
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
+MEDIA_URL = '/media/'
+
+# Absolute path to the directory static files should be collected to.
+# Don't put anything in this directory yourself; store your static files
+# in apps' "static/" subdirectories and in STATICFILES_DIRS.
+# Example: "/home/media/media.lawrence.com/static/"
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+
+# URL prefix for static files.
+# Example: "http://media.lawrence.com/static/"
+STATIC_URL = '/static/'
+
+# Additional locations of static files
+STATICFILES_DIRS = (
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+)
+
+# List of finder classes that know how to find static files in
+# various locations.
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ''
@@ -61,16 +88,18 @@ AUTHENTICATION_BACKENDS = (
 LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/'
 
-SALT = "ce5f0eb800d3ffe81e4ea86a696692f1"
-BBB_API_URL = "http://yourhost/bigbluebutton/api/"
+SALT = "c55f0eb800d36fe81e4aa86a696692f1"
+BBB_API_URL = "http://COMMUXI.COM/bigbluebutton/api/"
 
 ROOT_URLCONF = 'bbb.urls'
 
-PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
+#PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 
 TEMPLATE_DIRS = (
-    os.path.join(PROJECT_PATH, 'templates'),
-    os.path.join(PROJECT_PATH, 'bbb', 'templates'),
+    os.path.join(PROJECT_ROOT, 'templates'),
+    #os.path.join(PROJECT_PATH, 'templates'),
+    os.path.join(PROJECT_ROOT, 'bbb', 'templates'),
+    #os.path.join(PROJECT_PATH, 'bbb', 'templates'),
 )
 
 INSTALLED_APPS = (
@@ -81,4 +110,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'bbb',
     #'gunicorn',
+
 )
+
