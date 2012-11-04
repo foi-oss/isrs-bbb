@@ -1,23 +1,25 @@
 {% extends "base.html" %}
 
-{% block title %}Meetings{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "Meetings" %}{% endblock %}
 
 {% block content %}
-<h2>Meetings</h2>
+<h2>{% trans "Meetings" %}</h2>
 {% if meetings %}
     <ul class="large">
     {% for meeting in meetings %}
-        <li>{{ meeting.name }} <a class="more-info">view details</a>
+        <li>{{ meeting.name }} <a class="more-info">{% trans "view details" %}</a>
             <span class="right">
             {% if meeting.info.end_time == "0" %}
-            {% if meeting.running == 'true'  %}
-                <span class="status running">Running</span>
+              {% if meeting.running == 'true'  %}
+                <span class="status running">{% trans "Running" %}</span>
+              {% else %}
+                <span class="status notrunning">{% trans "Not running" %}</span>
+              {% endif %}
+              <form method="GET" action="{% url join meeting.name %}"><input type="submit" value="{% trans "Join" %}"></form> <form method="POST" action="{% url delete meeting.name meeting.moderator_pw %}">{% csrf_token %}<input type="submit" value="{% trans "End" %}"></form>
             {% else %}
-                <span class="status notrunning">Not running</span>
-            {% endif %}
-            <form method="GET" action="{% url join meeting.name %}"><input type="submit" value="Join"></form> <form method="POST" action="{% url delete meeting.name meeting.moderator_pw %}">{% csrf_token %}<input type="submit" value="End"></form>
-            {% else %}
-                <span class="status notrunning">Ended</span>
+                <span class="status notrunning">{% trans "Ended" %}</span>
             {% endif %}
             </span>
             <table>
@@ -32,6 +34,6 @@
     {% endfor %}
     </ul>
 {% else %}
-    <p>There are no meetings at the moment.</p>
+    <p>{% trans "There are no meetings at the moment." %}</p>
 {% endif %}
 {% endblock %}

@@ -7,6 +7,8 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.contrib import messages
+from django.utils.translation import ugettext_lazy as _
+
 import hashlib
 
 from bbb.models import Meeting
@@ -70,11 +72,11 @@ def delete_meeting(request, meeting_id, password):
         #meeting.delete()
         Meeting.end_meeting(meeting_id, password)
 
-        msg = 'Successfully ended meeting %s' % meeting_id
+        msg = _('Successfully ended meeting %s') % meeting_id
         messages.success(request, msg)
         return HttpResponseRedirect(reverse('meetings'))
     else:
-        msg = 'Unable to end meeting %s' % meeting_id
+        msg = _('Unable to end meeting %s') % meeting_id
         messages.error(request, msg)
         return HttpResponseRedirect(reverse('meetings'))
 
@@ -95,7 +97,7 @@ def create_meeting(request):
             meeting.meeting_id = data.get('meeting_id')
             url = meeting.start()
             meeting.save()
-            msg = 'Successfully created meeting %s' % meeting.meeting_id
+            msg = _('Successfully created meeting %s') % meeting.meeting_id
             messages.success(request, msg)
             return HttpResponseRedirect(reverse('meetings'))
             '''

@@ -3,8 +3,8 @@ from bbb.views.core import (home_page, create_meeting, begin_meeting, meetings,
                             join_meeting, delete_meeting)
 
 # Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from django.contrib import admin
+admin.autodiscover()
 
 urlpatterns = patterns('',
     url('^$', home_page, name='home'),
@@ -23,4 +23,7 @@ urlpatterns = patterns('',
     url('^help.html$', 'django.views.generic.simple.redirect_to', {
             'url': 'http://www.bigbluebutton.org/content/videos' ,
         }, name='help'),
+ 
+    # Uncomment the next line to enable the admin:
+    url(r'^admin/', include(admin.site.urls)),
 )

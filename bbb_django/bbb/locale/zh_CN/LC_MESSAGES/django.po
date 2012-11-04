@@ -1,0 +1,171 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-11-04 22:02+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: models.py:26 models.py:154
+msgid "meeting name"
+msgstr "会议名称"
+
+#: models.py:27
+msgid "meeting id"
+msgstr "会议id"
+
+#: models.py:28 models.py:155
+msgid "attendee password"
+msgstr "会议密码"
+
+#: models.py:29 models.py:157
+msgid "moderator password"
+msgstr "管理员密码"
+
+#: models.py:171
+msgid "Your name"
+msgstr "姓名"
+
+#: models.py:172
+msgid "password"
+msgstr "密码"
+
+#: templates/base.html:218 templates/home.html:4
+msgid "Home"
+msgstr "主页"
+
+#: templates/base.html:220
+msgid "Logged in as"
+msgstr "登陆帐号"
+
+#: templates/base.html:220
+msgid "Log out"
+msgstr "退出"
+
+#: templates/base.html:222
+msgid "Log in"
+msgstr "登陆"
+
+#: templates/create.html:5
+msgid "Create a meeting"
+msgstr "创建会议"
+
+#: templates/create.html:8 templates/home.html:9
+msgid "Create Meeting"
+msgstr "创建会议"
+
+#: templates/create.html:15
+msgid "create"
+msgstr "创建"
+
+#: templates/home.html:10 templates/meetings.html:5
+#: templates/meetings.html.py:8
+msgid "Meetings"
+msgstr "会议列表"
+
+#: templates/home.html:13
+msgid ""
+"<p>Welcome to the Django BigBlueButton web conferencing server. If you are "
+"here to attend a webinar then you should have been issued a URL to log into "
+"the meeting.</p>"
+msgstr "<p>欢迎使用BigBlueButton视频会议系统请登陆后继续使用</p>"
+
+#: templates/join.html:5 templates/join.html.py:10
+msgid "Join meeting"
+msgstr "加入会议"
+
+#: templates/join.html:11
+#, python-format
+msgid ""
+" \"Invite others to this meeting with <a href=\"/meeting/%(meeting_name)s/"
+"join\">this URL</a>"
+msgstr ""
+"通过这里的<a href=\"/meeting/%(meeting_name)s/join\">链接</a>邀请其他人参加会"
+"议"
+
+#: templates/join.html:17 templates/meetings.html:21
+msgid "Join"
+msgstr "加入会议"
+
+#: templates/login.html:5 templates/login.html.py:11 templates/login.html:16
+msgid "Log In"
+msgstr "登陆"
+
+#: templates/meetings.html:12
+msgid "view details"
+msgstr "查看详细信息"
+
+#: templates/meetings.html:17
+msgid "Running"
+msgstr "运行中"
+
+#: templates/meetings.html:19
+msgid "Not running"
+msgstr "未开始"
+
+#: templates/meetings.html:21
+msgid "End"
+msgstr "结束会议"
+
+#: templates/meetings.html:23
+msgid "Ended"
+msgstr "已结束"
+
+#: templates/meetings.html:38
+msgid "There are no meetings at the moment."
+msgstr "当前没有会议"
+
+#: views/core.py:75
+#, python-format
+msgid "Successfully ended meeting %s"
+msgstr "成功结束会议%s"
+
+#: views/core.py:79
+#, python-format
+msgid "Unable to end meeting %s"
+msgstr "未能结束会议%s"
+
+#: views/core.py:100
+#, python-format
+msgid "Successfully created meeting %s"
+msgstr "成功创建会议%s"
+
+#~ msgid "invite_url"
+#~ msgstr "邀请链接"
+
+#~ msgid "start_time"
+#~ msgstr "开始时间"
+
+#~ msgid "end_time"
+#~ msgstr "结束时间"
+
+#~ msgid "participant_count"
+#~ msgstr "参会人数"
+
+#~ msgid "moderator_count"
+#~ msgstr "管理员人数"
+
+#~ msgid "moderator_pw"
+#~ msgstr "管理员密码"
+
+#~ msgid "attendee_pw"
+#~ msgstr "会议密码"
+
+#~ msgid "running"
+#~ msgstr "运行中"
+
+#~ msgid "info"
+#~ msgstr "其他信息"
+
+#~ msgid "name"
+#~ msgstr "会议名称"

@@ -2,6 +2,7 @@ from django.db import models
 from django import forms
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext_lazy as _
 
 from urllib2 import urlopen
 from urllib import urlencode
@@ -22,10 +23,10 @@ def parse(response):
 
 class Meeting(models.Model):
 
-    name = models.CharField(max_length=100, unique=True)
-    meeting_id = models.CharField(max_length=100, unique=True)
-    attendee_password = models.CharField(max_length=50)
-    moderator_password = models.CharField(max_length=50)
+    name = models.CharField(max_length=100, unique=True, verbose_name=_('meeting name'))
+    meeting_id = models.CharField(max_length=100, unique=True, verbose_name=_('meeting id'))
+    attendee_password = models.CharField(max_length=50, verbose_name=_('attendee password'))
+    moderator_password = models.CharField(max_length=50, verbose_name=_('moderator password'))
 
     @classmethod
     def api_call(self, query, call):
@@ -150,10 +151,10 @@ class Meeting(models.Model):
         return url
 
     class CreateForm(forms.Form):
-        name = forms.SlugField()
-        attendee_password = forms.CharField(
+        name = forms.SlugField(label=_('meeting name'))
+        attendee_password = forms.CharField(label=_('attendee password'),
             widget=forms.PasswordInput(render_value=False))
-        moderator_password= forms.CharField(
+        moderator_password= forms.CharField(label=_('moderator password'),
             widget=forms.PasswordInput(render_value=False))
 
         def clean(self):
@@ -167,6 +168,6 @@ class Meeting(models.Model):
             return data
 
     class JoinForm(forms.Form):
-        name = forms.CharField(label="Your name")
-        password = forms.CharField(
+        name = forms.CharField(label=_("Your name"))
+        password = forms.CharField(label=_('password'),
             widget=forms.PasswordInput(render_value=False))

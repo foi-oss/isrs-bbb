@@ -1,3 +1,4 @@
+{% load i18n %} 
 <!DOCTYPE html>
 <html>
     <head>
@@ -214,11 +215,11 @@ th {
 
         <nav>
         <ul>
-            <li><a href="{% url home %}">Home</a></li>
+            <li><a href="{% url home %}">{% trans "Home" %}</a></li>
         {% if user.is_authenticated %}
-            <li>Logged in as {{ user.username }} <a href="{% url logout %}">Log out</a></li>
+            <li>{% trans "Logged in as" %} {{ user.username }} <a href="{% url logout %}">{% trans "Log out" %}</a></li>
         {% else %}
-            <li><a href="{% url login %}">Log in</a></li>
+            <li><a href="{% url login %}">{% trans "Log in" %}</a></li>
         {% endif %}
         </ul>
         </nav>

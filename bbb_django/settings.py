@@ -22,8 +22,12 @@ DATABASES = {
     }
 }
 
-TIME_ZONE = 'Europe/London'
-LANGUAGE_CODE = 'en-gb'
+
+#TIME_ZONE = 'Europe/London'
+TIME_ZONE = 'Asia/Shanghai'
+
+#LANGUAGE_CODE = 'en-gb'
+LANGUAGE_CODE = 'zh-CN'
 
 SITE_ID = 1
 
@@ -75,6 +79,7 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -95,6 +100,16 @@ ROOT_URLCONF = 'bbb.urls'
 
 #PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
+)
+
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT, 'templates'),
     #os.path.join(PROJECT_PATH, 'templates'),
@@ -108,8 +123,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
+    'django.contrib.admin',
     'bbb',
     #'gunicorn',
 
 )
 
+LOCALE_PATHS = os.path.join(PROJECT_ROOT, 'bbb', 'locale')
