@@ -6,6 +6,8 @@ from bbb.views.core import (home_page, create_meeting, begin_meeting, meetings,
 from django.contrib import admin
 admin.autodiscover()
 
+import settings
+
 urlpatterns = patterns('',
     url('^$', home_page, name='home'),
     url(r'^login/$', 'django.contrib.auth.views.login', {
@@ -26,4 +28,5 @@ urlpatterns = patterns('',
  
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.STATIC_ROOT}),
 )
