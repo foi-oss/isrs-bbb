@@ -94,8 +94,6 @@ AUTHENTICATION_BACKENDS = (
 LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/'
 
-SALT = "c55f0eb800d36fe81e4aa86a696692f1"
-BBB_API_URL = "http://COMMUXI.COM/bigbluebutton/api/"
 
 ROOT_URLCONF = 'bbb.urls'
 
@@ -132,3 +130,9 @@ INSTALLED_APPS = (
 )
 
 LOCALE_PATHS = os.path.join(PROJECT_ROOT, 'bbb', 'locale')
+
+## Load our local_settings
+try:
+  from bbb.local_settings import *
+except ImportError:
+  print >> sys.stderr, "Could not import local_settings, using defaults!"
