@@ -1,1 +1,10 @@
-django >= 1.0
+# This is a PIP requirements file.
+# To setup a dev environment:
+#
+# pip install virtualenv
+# virtualenv --distribute --no-site-packages --prompt "(bbbforum venv) " .venv
+# source .venv/bin/activate
+
+Django==1.3
+flup
+South
