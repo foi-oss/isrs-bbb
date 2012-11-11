@@ -8,7 +8,7 @@
 <form action="" method="POST">
 {% csrf_token %}
 <h2>{% trans "Join meeting" %} '{{ meeting_name }}'</h2>
-<p>{% blocktrans %} "Invite others to this meeting with <a href="/meeting/{{ meeting_name }}/join">this URL</a>{% endblocktrans %}</p>
+<p>{% blocktrans %} "Invite others to this meeting with <a href="/meeting/{{ meeting_id }}/join">this URL</a>{% endblocktrans %}</p>
 <table>
     {{form}}
     <tr>

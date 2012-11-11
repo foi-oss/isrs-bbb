@@ -9,7 +9,7 @@ from bbb.models import Meeting
 
 
 class MeetingAdmin(admin.ModelAdmin):
-    list_display = ('name','meeting_id') 
+    list_display = ('name','id') 
     list_filter = ['name']
     search_fields = ['name']
 

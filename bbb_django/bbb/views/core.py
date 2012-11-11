@@ -58,9 +58,11 @@ def join_meeting(request, meeting_id):
     else:
         form = form_class()
 
+    meeting = Meeting.objects.get(id=meeting_id)
     context = RequestContext(request, {
         'form': form,
-        'meeting_name': meeting_id,
+        'meeting_name': meeting.name,
+        'meeting_id': meeting_id
     })
 
     return render_to_response('join.html', context)
@@ -94,10 +96,10 @@ def create_meeting(request):
             #password = hashlib.sha1(data.get('password')).hexdigest()
             meeting.attendee_password = data.get('attendee_password')
             meeting.moderator_password = data.get('moderator_password')
-            meeting.meeting_id = data.get('meeting_id')
-            url = meeting.start()
+            #meeting.meeting_id = data.get('meeting_id')
             meeting.save()
-            msg = _('Successfully created meeting %s') % meeting.meeting_id
+            url = meeting.start()
+            msg = _('Successfully created meeting %s') % meeting.name
             messages.success(request, msg)
             return HttpResponseRedirect(reverse('meetings'))
             '''

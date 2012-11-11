@@ -23,8 +23,7 @@ def parse(response):
 
 class Meeting(models.Model):
 
-    name = models.CharField(max_length=100, unique=True, verbose_name=_('meeting name'))
-    meeting_id = models.CharField(max_length=100, unique=True, verbose_name=_('meeting id'))
+    name = models.CharField(max_length=100, verbose_name=_('meeting name'))
     attendee_password = models.CharField(max_length=50, verbose_name=_('attendee password'))
     moderator_password = models.CharField(max_length=50, verbose_name=_('moderator password'))
 
@@ -38,7 +37,7 @@ class Meeting(models.Model):
     def is_running(self):
         call = 'isMeetingRunning'
         query = urlencode((
-            ('meetingID', self.meeting_id),
+            ('meetingID', self.id),
         ))
         hashed = self.api_call(query, call)
         url = settings.BBB_API_URL + call + '?' + hashed
@@ -102,10 +101,12 @@ class Meeting(models.Model):
             d = []
             r = result[1].findall('meeting')
             for m in r:
+                meeting_name = m.find('meetingName').text
                 meeting_id = m.find('meetingID').text
                 password = m.find('moderatorPW').text
                 d.append({
-                    'name': meeting_id,
+                    'name': meeting_name,
+                    'meeting_id': meeting_id,
                     'running': m.find('running').text,
                     'moderator_pw': password,
                     'attendee_pw': m.find('attendeePW').text,
@@ -122,8 +123,8 @@ class Meeting(models.Model):
         call = 'create' 
         voicebridge = 70000 + random.randint(0,9999)
         query = urlencode((
-            ('name', self.name),
-            ('meetingID', self.meeting_id),
+            ('name', self.name.encode('utf8')),
+            ('meetingID', self.id),
             ('attendeePW', self.attendee_password),
             ('moderatorPW', self.moderator_password),
             ('voiceBridge', voicebridge),
@@ -142,7 +143,7 @@ class Meeting(models.Model):
     def join_url(self, meeting_id, name, password):
         call = 'join'
         query = urlencode((
-            ('fullName', name),
+            ('fullName', name.encode('utf8')),
             ('meetingID', meeting_id),
             ('password', password),
         ))
@@ -151,7 +152,7 @@ class Meeting(models.Model):
         return url
 
     class CreateForm(forms.Form):
-        name = forms.SlugField(label=_('meeting name'))
+        name = forms.CharField(label=_('meeting name'))
         attendee_password = forms.CharField(label=_('attendee password'),
             widget=forms.PasswordInput(render_value=False))
         moderator_password= forms.CharField(label=_('moderator password'),
@@ -161,10 +162,10 @@ class Meeting(models.Model):
             data = self.cleaned_data
 
             # TODO: should check for errors before modifying
-            data['meeting_id'] = data.get('name')
+            #data['meeting_id'] = data.get('name')
 
-            if Meeting.objects.filter(name = data.get('name')):
-                raise forms.ValidationError("That meeting name is already in use")
+            #if Meeting.objects.filter(name = data.get('name')):
+            #    raise forms.ValidationError("That meeting name is already in use")
             return data
 
     class JoinForm(forms.Form):

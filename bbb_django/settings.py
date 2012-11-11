@@ -126,6 +126,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.admin',
     'bbb',
+    'south',
     #'gunicorn',
 
 )
