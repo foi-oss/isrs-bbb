@@ -97,6 +97,7 @@ def create_meeting(request):
             meeting.attendee_password = data.get('attendee_password')
             meeting.moderator_password = data.get('moderator_password')
             #meeting.meeting_id = data.get('meeting_id')
+            meeting.welcome = data.get('welcome')
             meeting.save()
             url = meeting.start()
             msg = _('Successfully created meeting %s') % meeting.name

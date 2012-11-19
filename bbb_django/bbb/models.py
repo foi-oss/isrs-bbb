@@ -26,6 +26,14 @@ class Meeting(models.Model):
     name = models.CharField(max_length=100, verbose_name=_('meeting name'))
     attendee_password = models.CharField(max_length=50, verbose_name=_('attendee password'))
     moderator_password = models.CharField(max_length=50, verbose_name=_('moderator password'))
+    welcome = models.CharField(max_length=100, verbose_name=_('welcome message'))
+
+    #def __unicode__(self):
+    #    return self.name
+
+    class Meta:
+        verbose_name = _('meeting')
+        verbose_name_plural = _('meetings')
 
     @classmethod
     def api_call(self, query, call):
@@ -128,7 +136,8 @@ class Meeting(models.Model):
             ('attendeePW', self.attendee_password),
             ('moderatorPW', self.moderator_password),
             ('voiceBridge', voicebridge),
-            ('welcome', "Welcome!"),
+            #('welcome', _("Welcome!").encode('utf8')),
+            ('welcome', self.welcome.encode('utf8')),
         ))
         hashed = self.api_call(query, call)
         url = settings.BBB_API_URL + call + '?' + hashed
@@ -155,8 +164,9 @@ class Meeting(models.Model):
         name = forms.CharField(label=_('meeting name'))
         attendee_password = forms.CharField(label=_('attendee password'),
             widget=forms.PasswordInput(render_value=False))
-        moderator_password= forms.CharField(label=_('moderator password'),
+        moderator_password = forms.CharField(label=_('moderator password'),
             widget=forms.PasswordInput(render_value=False))
+        welcome = forms.CharField(label=_('welcome message'), initial=_('Welcome!'))
 
         def clean(self):
             data = self.cleaned_data

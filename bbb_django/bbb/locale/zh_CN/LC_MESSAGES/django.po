@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-04 22:02+0800\n"
+"POT-Creation-Date: 2012-11-19 21:11+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,27 +16,39 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: models.py:26 models.py:154
+#: models.py:26 models.py:164
 msgid "meeting name"
 msgstr "会议名称"
 
-#: models.py:27
-msgid "meeting id"
-msgstr "会议id"
-
-#: models.py:28 models.py:155
+#: models.py:27 models.py:165
 msgid "attendee password"
 msgstr "会议密码"
 
-#: models.py:29 models.py:157
+#: models.py:28 models.py:167
 msgid "moderator password"
 msgstr "管理员密码"
 
-#: models.py:171
+#: models.py:29 models.py:169
+msgid "welcome message"
+msgstr "欢迎信息"
+
+#: models.py:35
+msgid "meeting"
+msgstr "会议"
+
+#: models.py:36
+msgid "meetings"
+msgstr "会议列表"
+
+#: models.py:169
+msgid "Welcome!"
+msgstr "欢迎！"
+
+#: models.py:182
 msgid "Your name"
 msgstr "姓名"
 
-#: models.py:172
+#: models.py:183
 msgid "password"
 msgstr "密码"
 
@@ -87,13 +99,12 @@ msgstr "加入会议"
 #: templates/join.html:11
 #, python-format
 msgid ""
-" \"Invite others to this meeting with <a href=\"/meeting/%(meeting_name)s/"
-"join\">this URL</a>"
+" \"Invite others to this meeting with <a href=\"/meeting/%(meeting_id)s/join"
+"\">this URL</a>"
 msgstr ""
-"通过这里的<a href=\"/meeting/%(meeting_name)s/join\">链接</a>邀请其他人参加会"
-"议"
+"通过这里的<a href=\"/meeting/%(meeting_id)s/join\">链接</a>邀请其他人参加会议"
 
-#: templates/join.html:17 templates/meetings.html:21
+#: templates/join.html:17 templates/meetings.html:20
 msgid "Join"
 msgstr "加入会议"
 
@@ -105,37 +116,37 @@ msgstr "登陆"
 msgid "view details"
 msgstr "查看详细信息"
 
-#: templates/meetings.html:17
+#: templates/meetings.html:16
 msgid "Running"
 msgstr "运行中"
 
-#: templates/meetings.html:19
+#: templates/meetings.html:18
 msgid "Not running"
 msgstr "未开始"
 
-#: templates/meetings.html:21
+#: templates/meetings.html:20
 msgid "End"
 msgstr "结束会议"
 
-#: templates/meetings.html:23
+#: templates/meetings.html:22
 msgid "Ended"
 msgstr "已结束"
 
-#: templates/meetings.html:38
+#: templates/meetings.html:37
 msgid "There are no meetings at the moment."
 msgstr "当前没有会议"
 
-#: views/core.py:75
+#: views/core.py:77
 #, python-format
 msgid "Successfully ended meeting %s"
 msgstr "成功结束会议%s"
 
-#: views/core.py:79
+#: views/core.py:81
 #, python-format
 msgid "Unable to end meeting %s"
 msgstr "未能结束会议%s"
 
-#: views/core.py:100
+#: views/core.py:103
 #, python-format
 msgid "Successfully created meeting %s"
 msgstr "成功创建会议%s"
