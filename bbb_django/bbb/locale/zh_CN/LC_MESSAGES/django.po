@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-19 21:11+0800\n"
+"POT-Creation-Date: 2012-11-21 21:47+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,39 +16,71 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: models.py:26 models.py:164
+#: models.py:26
+msgid "unlimited"
+msgstr "无限制"
+
+#: models.py:27
+msgid "15 min"
+msgstr "15分钟"
+
+#: models.py:28
+msgid "30 min"
+msgstr "30分钟"
+
+#: models.py:29
+msgid "1 hour"
+msgstr "1小时"
+
+#: models.py:30
+msgid "2 hour"
+msgstr "2小时"
+
+#: models.py:36 models.py:177
 msgid "meeting name"
 msgstr "会议名称"
 
-#: models.py:27 models.py:165
+#: models.py:37 models.py:178
 msgid "attendee password"
 msgstr "会议密码"
 
-#: models.py:28 models.py:167
+#: models.py:38 models.py:180
 msgid "moderator password"
 msgstr "管理员密码"
 
-#: models.py:29 models.py:169
+#: models.py:39 models.py:182
 msgid "welcome message"
 msgstr "欢迎信息"
 
-#: models.py:35
+#: models.py:48
 msgid "meeting"
 msgstr "会议"
 
-#: models.py:36
+#: models.py:49
 msgid "meetings"
 msgstr "会议列表"
 
-#: models.py:169
+#: models.py:182
 msgid "Welcome!"
 msgstr "欢迎！"
 
-#: models.py:182
+#: models.py:183
+msgid "record"
+msgstr "录制"
+
+#: models.py:184
+msgid "duration"
+msgstr "时长"
+
+#: models.py:185
+msgid "start time"
+msgstr "开始时间"
+
+#: models.py:198
 msgid "Your name"
 msgstr "姓名"
 
-#: models.py:183
+#: models.py:199
 msgid "password"
 msgstr "密码"
 
@@ -153,9 +185,6 @@ msgstr "成功创建会议%s"
 
 #~ msgid "invite_url"
 #~ msgstr "邀请链接"
-
-#~ msgid "start_time"
-#~ msgstr "开始时间"
 
 #~ msgid "end_time"
 #~ msgstr "结束时间"

@@ -9,6 +9,7 @@ from urllib import urlencode
 from hashlib import sha1
 import xml.etree.ElementTree as ET
 import random
+import datetime
 
 def parse(response):
     try:
@@ -21,12 +22,24 @@ def parse(response):
     except:
         return None
 
+MEETING_DURATION = (
+    (0, _('unlimited')),
+    (15, _('15 min')),
+    (30, _('30 min')),
+    (60, _('1 hour')),
+    (120, _('2 hour')),
+)
+
 class Meeting(models.Model):
+
 
     name = models.CharField(max_length=100, verbose_name=_('meeting name'))
     attendee_password = models.CharField(max_length=50, verbose_name=_('attendee password'))
     moderator_password = models.CharField(max_length=50, verbose_name=_('moderator password'))
     welcome = models.CharField(max_length=100, verbose_name=_('welcome message'))
+    record = models.BooleanField(default=False)
+    duration = models.IntegerField(default=0, choices=MEETING_DURATION)
+    start_time = models.DateTimeField()
 
     #def __unicode__(self):
     #    return self.name
@@ -167,7 +180,10 @@ class Meeting(models.Model):
         moderator_password = forms.CharField(label=_('moderator password'),
             widget=forms.PasswordInput(render_value=False))
         welcome = forms.CharField(label=_('welcome message'), initial=_('Welcome!'))
-
+        record = forms.BooleanField(label=_('record'))
+        duration = forms.ChoiceField(label=_('duration'), choices=MEETING_DURATION)
+        start_time = forms.DateTimeField(label=_('start time'), initial=datetime.date.today())
+       
         def clean(self):
             data = self.cleaned_data
 
