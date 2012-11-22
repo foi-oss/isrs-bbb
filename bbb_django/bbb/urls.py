@@ -8,6 +8,9 @@ admin.autodiscover()
 
 import settings
 
+def i18n_javascript(request):
+    return admin.site.i18n_javascript(request)
+
 urlpatterns = patterns('',
     url('^$', home_page, name='home'),
     url(r'^login/$', 'django.contrib.auth.views.login', {
@@ -26,6 +29,8 @@ urlpatterns = patterns('',
             'url': 'http://www.bigbluebutton.org/content/videos' ,
         }, name='help'),
  
+    (r'^admin/jsi18n', i18n_javascript),
+
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.STATIC_ROOT}),

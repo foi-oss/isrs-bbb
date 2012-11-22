@@ -3,6 +3,7 @@ from django import forms
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.admin import widgets
 
 from urllib2 import urlopen
 from urllib import urlencode
@@ -182,7 +183,7 @@ class Meeting(models.Model):
         welcome = forms.CharField(label=_('welcome message'), initial=_('Welcome!'))
         record = forms.BooleanField(label=_('record'))
         duration = forms.ChoiceField(label=_('duration'), choices=MEETING_DURATION)
-        start_time = forms.DateTimeField(label=_('start time'), initial=datetime.date.today())
+        start_time = forms.DateTimeField(label=_('start time'), widget=widgets.AdminSplitDateTime())
        
         def clean(self):
             data = self.cleaned_data

@@ -4,12 +4,21 @@
 
 {% block title %}{% trans "Create a meeting" %}{% endblock %}
 
+{% block extrahead %}
+        <script type="text/javascript">window.__admin_media_prefix__ = "/static/admin/";</script>
+        <script type="text/javascript" src="/admin/jsi18n/"></script>
+        <script type="text/javascript" src="/static/admin/js/core.js"></script>
+        <script type="text/javascript" src="/static/admin/js/calendar.js"></script>
+        <script type="text/javascript" src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
+{% endblock%}
+
 {% block content %}
 <h2>{% trans "Create Meeting" %}</h2>
 <form action="" method ="POST">
 <table>
     {% csrf_token %}
     {{form}}
+    <!--<input name="date" value="{%now "Y-m-d"%}" class="vDateField" type="text" id="query_date" size="10" /> --> 
     <tr>
         <th></th>
         <td><input type="submit" value="{% trans "create" %}"></td>

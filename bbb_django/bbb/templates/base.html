@@ -4,14 +4,20 @@
     <head>
         <title>{% block title %}{% endblock %}</title>
         {% block extrahead %}{% endblock%}
-        <link rel="stylesheet" type="text/css" href="/static/reset.css">
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+        <!--<link rel="stylesheet" type="text/css" href="/static/reset.css">-->
+        <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css" />
+        <link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css" />
+
+        <!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>-->
+        <script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
+
         <script>
             $(document).ready(function() {
                 $('.more-info').show();
                 $('.more-info').click(function() { $(this).parent().find('table').toggle() });
             });
         </script>
+
         <style>
 html {
     background: #eee;
@@ -194,6 +200,8 @@ input[type='text'], input[type='password'] {
     border-style: solid;
     border-color: #ccc#ddd #eee#ddd;
 }
+
+/*
 tr {
     padding: 4px 0;
     display: block;
@@ -205,7 +213,8 @@ th {
     vertical-align: top;
     padding: 0.2em 0.4em 0.2em 0;
 }
-        </style>
+*/
+    </style>
     </head>
     <body>
         <div class="container">
