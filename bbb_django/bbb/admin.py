@@ -10,7 +10,7 @@ from bbb.models import Meeting
 
 class MeetingAdmin(admin.ModelAdmin):
     list_display = ('name','id') 
-    list_filter = ['name']
-    search_fields = ['name']
+    list_filter = ['name', 'user']
+    search_fields = ['name','user' ]
 
 admin.site.register(Meeting, MeetingAdmin)

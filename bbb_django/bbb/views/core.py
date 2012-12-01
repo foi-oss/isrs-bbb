@@ -9,15 +9,38 @@ from django.conf import settings
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 
+from icalendar import Calendar, Event
+from datetime import timedelta
 import hashlib
 
-from bbb.models import Meeting
+from bbb.models import *
 
 def home_page(request):
     context = RequestContext(request, {
     })
     return render_to_response('home.html', context)
 
+def export_meeting(request, meeting_id):
+    meeting = Meeting.objects.get(id=meeting_id)
+    cal = Calendar()
+    cal.add('prodid', '-//commuxi Corporation//bbbforum release//')
+    cal.add('version', '2.0')
+    event = Event()
+    event.add('summary', meeting.name)
+    event.add('dtstart', meeting.start_time)
+    if meeting.duration == 0:
+        event.add('duration', timedelta(days=1))#unlimit is 1 day by default
+    else:
+        event.add('duration', timedelta(minutes=meeting.duration))
+    #event.add('dtend', '')
+    event.add('location', 'http://www.commux.com')
+    event.add('description', 'please join the meeting via %s, the attendee password is "%s"'%\
+      (request.build_absolute_uri(reverse('join',args=[meeting_id])), meeting.attendee_password))
+    cal.add_component(event)
+    print cal.to_ical()
+    response = HttpResponse(cal.to_ical(), mimetype='text/calendar')
+    response['Content-Disposition'] = 'attachment; filename=%s.ics'%meeting.name
+    return response
 
 @login_required
 def begin_meeting(request):
@@ -35,7 +58,32 @@ def begin_meeting(request):
 def meetings(request):
 
     #meetings = Meeting.objects.all()
-    meetings = Meeting.get_meetings()
+    existing = Meeting.objects.filter(user=request.user)
+    #meetings = Meeting.get_meetings()
+    started = Meeting.get_meetings()
+
+    meetings = []
+    for meeting in existing:        
+        d = {
+	    'name': meeting.name,
+	    'meeting_id': meeting.id,
+	    'info': {
+                'moderator_pw': meeting.moderator_password,
+	        'attendee_pw': meeting.attendee_password,
+                'record': meeting.record,
+                'duration': meeting.get_duration_display(),
+                'start_time': meeting.start_time,
+                'started': meeting.started,
+            },
+        }
+
+	detail = started.get('%d'%meeting.id)
+        print meeting.id, detail
+	if detail is not None:
+            d['running'] = detail['running']
+	    d['info'].update(detail['info'])
+
+        meetings.append(d)
 
     context = RequestContext(request, {
         'meetings': meetings,
@@ -54,6 +102,14 @@ def join_meeting(request, meeting_id):
             name = data.get('name')
             password = data.get('password')
 
+            meeting = Meeting.objects.get(id=meeting_id)
+            if password == meeting.moderator_password:
+                #TODO: How to delete the records in db, lazy way?
+                #meeting.logout_url = request.build_absolute_uri(reverse('delete',args=[meeting_id, password]))
+                meeting.started = True
+                meeting.save()
+                url = meeting.start()
+
             return HttpResponseRedirect(Meeting.join_url(meeting_id, name, password))
     else:
         form = form_class()
@@ -69,9 +125,10 @@ def join_meeting(request, meeting_id):
 
 @login_required
 def delete_meeting(request, meeting_id, password):
-    if request.method == "POST":
-        #meeting = Meeting.objects.filter(meeting_id=meeting_id)
-        #meeting.delete()
+    #if request.method == "POST":
+    if True:
+        meeting = Meeting.objects.filter(id=meeting_id)
+        meeting.delete()
         Meeting.end_meeting(meeting_id, password)
 
         msg = _('Successfully ended meeting %s') % meeting_id
@@ -98,9 +155,14 @@ def create_meeting(request):
             meeting.moderator_password = data.get('moderator_password')
             #meeting.meeting_id = data.get('meeting_id')
             meeting.welcome = data.get('welcome')
+            meeting.record = data.get('record')
+            meeting.duration = data.get('duration')
+            meeting.start_time = data.get('start_time')
+            meeting.user = request.user
             meeting.save()
-            url = meeting.start()
-            msg = _('Successfully created meeting %s') % meeting.name
+            #url = meeting.start()
+            #msg = _('Successfully created meeting %s') % meeting.name
+            msg = _('Successfully schdulered meeting %s') % meeting.name
             messages.success(request, msg)
             return HttpResponseRedirect(reverse('meetings'))
             '''

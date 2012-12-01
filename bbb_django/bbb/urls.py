@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 from bbb.views.core import (home_page, create_meeting, begin_meeting, meetings,
-                            join_meeting, delete_meeting)
+                            join_meeting, delete_meeting, export_meeting)
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -19,14 +19,14 @@ urlpatterns = patterns('',
     url(r'^logoff/$', 'django.contrib.auth.views.logout', {'next_page': '/'},
         name='logout'),
     url('^create/$', create_meeting, name='create'),
-    url('^begin/$', begin_meeting, name='begin'),
+    #url('^begin/$', begin_meeting, name='begin'),
     url('^meetings/$', meetings, name='meetings'),
-    url('^meeting/(?P<meeting_id>[a-zA-Z0-9 _-]+)/join$', join_meeting,
-        name='join'),
+    url('^meeting/(?P<meeting_id>[a-zA-Z0-9 _-]+)/export$', export_meeting, name='export'),
+    url('^meeting/(?P<meeting_id>[a-zA-Z0-9 _-]+)/join$', join_meeting, name='join'),
     url('^meeting/(?P<meeting_id>[a-zA-Z0-9 _-]+)/(?P<password>.*)/delete$', delete_meeting,
         name='delete'),
     url('^help.html$', 'django.views.generic.simple.redirect_to', {
-            'url': 'http://www.bigbluebutton.org/content/videos' ,
+            'url': 'http://www.bbbforum.com' ,
         }, name='help'),
  
     (r'^admin/jsi18n', i18n_javascript),

@@ -4,9 +4,11 @@
     <head>
         <title>{% block title %}{% endblock %}</title>
         {% block extrahead %}{% endblock%}
-        <!--<link rel="stylesheet" type="text/css" href="/static/reset.css">-->
+        <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+        <!--
         <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css" />
         <link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css" />
+        --> 
 
         <!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>-->
         <script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
@@ -80,7 +82,7 @@ a:hover {
 h1 {
     text-indent: -9999px;
     display: block;
-    background: url(/static/logo.png) no-repeat top left;
+    background: url(/static/img/logo.png) no-repeat top left;
     height: 48px;
     width: 194px;
     margin: 0 auto;
@@ -201,19 +203,20 @@ input[type='text'], input[type='password'] {
     border-color: #ccc#ddd #eee#ddd;
 }
 
-/*
+/**/
 tr {
     padding: 4px 0;
-    display: block;
+    //display: block;
 }
+
 th {
-    min-width: 160px;
+    //min-width: 160px;
     text-align: right;
     line-height:1.6em;
     vertical-align: top;
     padding: 0.2em 0.4em 0.2em 0;
 }
-*/
+
     </style>
     </head>
     <body>

@@ -4,6 +4,8 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import widgets
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 
 from urllib2 import urlopen
 from urllib import urlencode
@@ -29,18 +31,20 @@ MEETING_DURATION = (
     (30, _('30 min')),
     (60, _('1 hour')),
     (120, _('2 hour')),
+    (180, _('3 hour')),
 )
 
 class Meeting(models.Model):
 
-
+    user = models.ForeignKey(User, verbose_name=_('user'))
     name = models.CharField(max_length=100, verbose_name=_('meeting name'))
     attendee_password = models.CharField(max_length=50, verbose_name=_('attendee password'))
     moderator_password = models.CharField(max_length=50, verbose_name=_('moderator password'))
     welcome = models.CharField(max_length=100, verbose_name=_('welcome message'))
-    record = models.BooleanField(default=False)
-    duration = models.IntegerField(default=0, choices=MEETING_DURATION)
-    start_time = models.DateTimeField()
+    record = models.BooleanField(default=False, verbose_name=_('record'))
+    duration = models.IntegerField(default=0, choices=MEETING_DURATION, verbose_name=_('duration'))
+    start_time = models.DateTimeField(verbose_name=_('start time'))
+    started = models.BooleanField(default=False, verbose_name=_('started'))
 
     #def __unicode__(self):
     #    return self.name
@@ -120,22 +124,22 @@ class Meeting(models.Model):
         result = parse(urlopen(url).read())
         if result:
             # Create dict of values for easy use in template
-            d = []
+            d = {}
             r = result[1].findall('meeting')
             for m in r:
                 meeting_name = m.find('meetingName').text
                 meeting_id = m.find('meetingID').text
                 password = m.find('moderatorPW').text
-                d.append({
+                d[meeting_id] = {
                     'name': meeting_name,
                     'meeting_id': meeting_id,
                     'running': m.find('running').text,
-                    'moderator_pw': password,
-                    'attendee_pw': m.find('attendeePW').text,
+                    #'moderator_pw': password,
+                    #'attendee_pw': m.find('attendeePW').text,
                     'info': Meeting.meeting_info(
                         meeting_id,
                         password)
-                })
+                }
                 print d
             return d
         else:
@@ -152,6 +156,8 @@ class Meeting(models.Model):
             ('voiceBridge', voicebridge),
             #('welcome', _("Welcome!").encode('utf8')),
             ('welcome', self.welcome.encode('utf8')),
+            ('record', self.record),
+            #('duration', self.duration),
         ))
         hashed = self.api_call(query, call)
         url = settings.BBB_API_URL + call + '?' + hashed
@@ -181,7 +187,7 @@ class Meeting(models.Model):
         moderator_password = forms.CharField(label=_('moderator password'),
             widget=forms.PasswordInput(render_value=False))
         welcome = forms.CharField(label=_('welcome message'), initial=_('Welcome!'))
-        record = forms.BooleanField(label=_('record'))
+        record = forms.BooleanField(label=_('record'), initial=False, required=False)
         duration = forms.ChoiceField(label=_('duration'), choices=MEETING_DURATION)
         start_time = forms.DateTimeField(label=_('start time'), widget=widgets.AdminSplitDateTime())
        
