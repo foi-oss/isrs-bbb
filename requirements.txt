@@ -9,4 +9,4 @@ Django==1.3
 flup
 South
 pytz
-calendar
+icalendar

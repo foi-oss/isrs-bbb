@@ -44,7 +44,7 @@ def export_meeting(request, meeting_id):
     cal.add_component(event)
     #print cal.to_ical()
     response = HttpResponse(cal.to_ical(), mimetype='text/calendar')
-    response['Content-Disposition'] = 'attachment; filename=%s.ics'%meeting.name
+    response['Content-Disposition'] = 'attachment; filename=%s.ics'%meeting.name.encode('utf8')
     return response
 
 @login_required

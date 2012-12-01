@@ -40,7 +40,7 @@ class Meeting(models.Model):
     name = models.CharField(max_length=100, verbose_name=_('meeting name'))
     attendee_password = models.CharField(max_length=50, verbose_name=_('attendee password'))
     moderator_password = models.CharField(max_length=50, verbose_name=_('moderator password'))
-    welcome = models.CharField(max_length=100, verbose_name=_('welcome message'))
+    welcome = models.CharField(max_length=100, blank=True, verbose_name=_('welcome message'))
     record = models.BooleanField(default=False, verbose_name=_('record'))
     duration = models.IntegerField(default=0, choices=MEETING_DURATION, verbose_name=_('duration'))
     start_time = models.DateTimeField(verbose_name=_('start time'))
