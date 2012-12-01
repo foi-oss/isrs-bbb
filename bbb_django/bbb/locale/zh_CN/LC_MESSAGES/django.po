@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-01 19:03+0800\n"
+"POT-Creation-Date: 2012-12-01 20:25+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -113,7 +113,7 @@ msgid "Log out"
 msgstr "退出"
 
 #: templates/base.html:233 templates/calendar.html:9
-#: templates/calendar.html.py:12 templates/meetings.html:23
+#: templates/calendar.html.py:12
 msgid "Calendar"
 msgstr "日程"
 
@@ -188,6 +188,10 @@ msgstr "已结束"
 #: templates/meetings.html:22
 msgid "Not started"
 msgstr "未开始"
+
+#: templates/meetings.html:23
+msgid "Calendar export"
+msgstr "日程导出"
 
 #: templates/meetings.html:24
 msgid "Start"
