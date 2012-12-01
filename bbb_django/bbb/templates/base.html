@@ -230,6 +230,7 @@ th {
             <li><a href="{% url home %}">{% trans "Home" %}</a></li>
         {% if user.is_authenticated %}
             <li>{% trans "Logged in as" %} {{ user.username }} <a href="{% url logout %}">{% trans "Log out" %}</a></li>
+            <li><a href="{% url calendar_today %}">{% trans "Calendar" %}</a></li>
         {% else %}
             <li><a href="{% url login %}">{% trans "Log in" %}</a></li>
         {% endif %}

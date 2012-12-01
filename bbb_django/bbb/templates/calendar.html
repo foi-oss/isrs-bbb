@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block extrahead %}
+   <link rel="stylesheet" type="text/css" href="/static/css/calendar.css" />
+{% endblock %}
+
+{% block title %}{% trans "Calendar" %}{% endblock %}
+
+{% block content %}
+<h2>{% trans "Calendar" %}</h2>
+<table width="100%">
+    <tr>
+        <td width="20%" align="left">
+          &lt;&lt; <a href="/calendar/{{PreviousYear}}/{{PreviousMonth}}/">{{PreviousYear}}/{{PreviousMonth}}</a>
+        </td>
+        <td width="20%" align="left">
+          &lt;&lt; <a href="/calendar/{{YearBeforeThis}}/{{Month}}/">{{YearBeforeThis}}/{{Month}}</a>
+        </td>
+        <td width="20%" align="center"><a href="/calendar/">{% trans "Today" %}</a></td>
+        <td width="20%" align="right">
+          <a href="/calendar/{{YearAfterThis}}/{{Month}}/">{{YearAfterThis}}/{{Month}}</a> &gt;&gt;
+        </td>
+        <td width="20%" align="right">
+          <a href="/calendar/{{NextYear}}/{{NextMonth}}/">{{NextYear}}/{{NextMonth}}</a> &gt;&gt;
+        </td>
+    </tr>
+</table>
+<div id="calendar">
+  {{Calendar}}
+</div>
+{% endblock %}

@@ -45,6 +45,7 @@ class Meeting(models.Model):
     duration = models.IntegerField(default=0, choices=MEETING_DURATION, verbose_name=_('duration'))
     start_time = models.DateTimeField(verbose_name=_('start time'))
     started = models.BooleanField(default=False, verbose_name=_('started'))
+    agenda = models.CharField(max_length=1000, blank=True, verbose_name=_('agenda'))
 
     #def __unicode__(self):
     #    return self.name
@@ -190,6 +191,7 @@ class Meeting(models.Model):
         record = forms.BooleanField(label=_('record'), initial=False, required=False)
         duration = forms.ChoiceField(label=_('duration'), choices=MEETING_DURATION)
         start_time = forms.DateTimeField(label=_('start time'), widget=widgets.AdminSplitDateTime())
+        agenda = forms.CharField(label=_('agenda'), required=False, widget=forms.Textarea)
        
         def clean(self):
             data = self.cleaned_data

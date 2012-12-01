@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
-from bbb.views.core import (home_page, create_meeting, begin_meeting, meetings,
-                            join_meeting, delete_meeting, export_meeting)
+#from bbb.views.core import (home_page, create_meeting, begin_meeting, meetings, join_meeting, delete_meeting, export_meeting)
+from bbb.views.core import *
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -20,6 +20,8 @@ urlpatterns = patterns('',
         name='logout'),
     url('^create/$', create_meeting, name='create'),
     #url('^begin/$', begin_meeting, name='begin'),
+    url('^calendar/(?P<year>\d+)/(?P<month>\d+)/$', calendar, name='calendar'),
+    url('^calendar/$', calendar_today, name='calendar_today'),
     url('^meetings/$', meetings, name='meetings'),
     url('^meeting/(?P<meeting_id>[a-zA-Z0-9 _-]+)/export$', export_meeting, name='export'),
     url('^meeting/(?P<meeting_id>[a-zA-Z0-9 _-]+)/join$', join_meeting, name='join'),
