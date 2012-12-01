@@ -20,6 +20,7 @@ def home_page(request):
     })
     return render_to_response('home.html', context)
 
+@login_required
 def export_meeting(request, meeting_id):
     meeting = Meeting.objects.get(id=meeting_id)
     cal = Calendar()
@@ -125,8 +126,7 @@ def join_meeting(request, meeting_id):
 
 @login_required
 def delete_meeting(request, meeting_id, password):
-    #if request.method == "POST":
-    if True:
+    if request.method == "POST":
         meeting = Meeting.objects.filter(id=meeting_id)
         meeting.delete()
         Meeting.end_meeting(meeting_id, password)
