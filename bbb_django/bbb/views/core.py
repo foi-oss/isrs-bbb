@@ -73,7 +73,10 @@ def calendar(request, year, month):
     year_before = y - 1
 
     items = request.LANGUAGE_CODE.split('-')
-    locale_name = items[0] + '_' + items[1].upper() + '.UTF-8'
+    locale_name = 'en_US.UTF-8'
+    if len(items) == 2:
+        locale_name = items[0] + '_' + items[1].upper() + '.UTF-8'
+
     print m,y,prev_month,prev_year,next_month,next_year,year_before,year_after 
     html_calendar = MeetingCalendar(meetings, locale=locale_name).formatmonth(y, m)
     context = RequestContext(request, {
