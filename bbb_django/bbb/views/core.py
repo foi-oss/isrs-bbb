@@ -58,7 +58,8 @@ def calendar(request, year, month):
     m = int(month)
     from_date = date(y, m, 1)
     to_date = date(y, m, monthrange(y,m)[1])
-    meetings = Meeting.objects.filter(user=request.user).filter(start_time__gte=from_date, start_time__lte=to_date)
+    #meetings = Meeting.objects.filter(user=request.user).filter(start_time__gte=from_date, start_time__lte=to_date)
+    meetings = Meeting.objects.filter(start_time__gte=from_date, start_time__lte=to_date)
     prev_year = y
     prev_month = m - 1 
     if prev_month == 0:
@@ -108,8 +109,8 @@ def begin_meeting(request):
 @login_required
 def meetings(request):
 
-    #meetings = Meeting.objects.all()
-    existing = Meeting.objects.filter(user=request.user)
+    existing = Meeting.objects.all()
+    #existing = Meeting.objects.filter(user=request.user)
     #meetings = Meeting.get_meetings()
     started = Meeting.get_meetings()
 
@@ -175,6 +176,7 @@ def join_meeting(request, meeting_id):
     return render_to_response('join.html', context)
 
 @login_required
+@permission_required('bbb.end_meeting')
 def delete_meeting(request, meeting_id, password):
     if request.method == "POST":
         meeting = Meeting.objects.filter(id=meeting_id)
@@ -190,6 +192,7 @@ def delete_meeting(request, meeting_id, password):
         return HttpResponseRedirect(reverse('meetings'))
 
 @login_required
+@permission_required('bbb.create_meeting')
 def create_meeting(request):
     form_class = Meeting.CreateForm
 

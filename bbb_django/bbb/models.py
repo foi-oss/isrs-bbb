@@ -53,6 +53,10 @@ class Meeting(models.Model):
     class Meta:
         verbose_name = _('meeting')
         verbose_name_plural = _('meetings')
+        permissions = (
+            ('create_meeting', 'Can create meeting'),
+	    ('end_meetnig', 'Can end meeting'),
+        )
 
     @classmethod
     def api_call(self, query, call):
