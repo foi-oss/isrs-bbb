@@ -115,13 +115,13 @@ class Meeting(models.Model):
   def start(self):
     voicebridge = 70000 + random.randint(0,9999)
     result = self.api_call('create', {
-      'name':        self.name.encode('utf8')),
-      'meetingID':   self.id),
-      'attendeePW':  self.attendee_password),
-      'moderatorPW': self.moderator_password),
-      'voiceBridge': voicebridge),
-      'welcome':     self.welcome.encode('utf8')),
-      'record':      self.record),
+      'name':        self.name.encode('utf8'),
+      'meetingID':   self.id,
+      'attendeePW':  self.attendee_password,
+      'moderatorPW': self.moderator_password,
+      'voiceBridge': voicebridge,
+      'welcome':     self.welcome.encode('utf8'),
+      'record':      self.record,
       #{'duration', self.duration),
     })
 
@@ -132,14 +132,14 @@ class Meeting(models.Model):
 
   @classmethod
   def join_url(self, meeting_id, name, password):
-    result = self.api_call('join', {
-      'fullName':   name.encode('utf8')),
+    query = urlencode({
+      'fullName':   name.encode('utf8'),
       'meetingID':  meeting_id,
       'password':   password,
     })
-    hashed = 
-    url = settings.BBB_API_URL + "join" + '?' + hashed
-    return url
+    checksum = sha1("join" + query + settings.SALT).hexdigest()
+
+    return "%s/join?%s&checksum=%s" % (settings.BBB_API_URL, query, checksum)
 
 class CreateForm(forms.Form):
   name = forms.CharField(label=_('meeting name'))
