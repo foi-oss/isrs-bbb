@@ -23,11 +23,9 @@ DATABASES = {
 }
 
 
-#TIME_ZONE = 'Europe/London'
-TIME_ZONE = 'Asia/Shanghai'
+TIME_ZONE = 'UTC'
 
-#LANGUAGE_CODE = 'en-gb'
-LANGUAGE_CODE = 'zh-CN'
+LANGUAGE_CODE = 'en-gb'
 
 SITE_ID = 1
 
@@ -125,8 +123,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'bbb',
     'south',
-    #'gunicorn',
-
+    'gunicorn',
 )
 
 LOCALE_PATHS = os.path.join(PROJECT_ROOT, 'bbb', 'locale')
