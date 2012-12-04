@@ -2,13 +2,15 @@
 
 {% load i18n %}
 
-{% block title %}{% trans "Join meeting" %}{% endblock %}
+{% block title %}{% trans "Join presentation" %}{% endblock %}
 
 {% block content %}
-<form action="" method="POST">
+<form action="" method="POST" id="join_meeting">
 {% csrf_token %}
-<h2>{% trans "Join meeting" %} '{{ meeting_name }}'</h2>
-<p>{% blocktrans %} "Invite others to this meeting with <a href="/meeting/{{ meeting_id }}/join">this URL</a>{% endblocktrans %}</p>
+<h2>{% trans "Join presentation" %} '{{ meeting_name }}'</h2>
+<p>Invite others to this presentation via the following link:<br/>
+<a href="/meeting/{{ meeting_id }}/join">http://studentresearchsymposium.com/meeting/{{ meeting_id }}/join</a>
+</p>
 <table>
     {{form}}
     <tr>

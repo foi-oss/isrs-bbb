@@ -45,7 +45,9 @@ class Meeting(models.Model):
   @classmethod
   def api_call(self, call, query):
     query['checksum'] = sha1(call + urlencode(query) + settings.SALT).hexdigest()
+    print 'BBB API REQUEST', call, params
     rq = requests.get(settings.BBB_API_URL + "/" + call, params=query)
+    print 'BBB API RESP', rq.ok
     
     if rq.ok != False:
       xml = ET.XML(rq.text)
@@ -165,5 +167,5 @@ class Meeting(models.Model):
 
   class JoinForm(forms.Form):
     name = forms.CharField(label=_("Your name"))
-    password = forms.CharField(label=_('password'),
+    password = forms.CharField(label=_('Password'),
                                widget=forms.PasswordInput(render_value=False))

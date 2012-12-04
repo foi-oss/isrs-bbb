@@ -7,23 +7,22 @@
     <link rel="stylesheet" type="text/css" href="/static/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/isrs.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <!-- <script type="text/javascript" src="/static/admin/js/jquery.min.js"></script> -->
   </head>
   <body>
     <div class="container">
       <header>
-        <h1>BBB Django</h1>
+        <h1>International Student Research Symposium</h1>
+
+        {% if user.is_authenticated %}        
         <nav>
           <ul>
             <li><a href="{% url home %}">{% trans "Home" %}</a></li>
-            {% if user.is_authenticated %}
             <li>{% trans "Logged in as" %} {{ user.username }} <a href="{% url logout %}">{% trans "Log out" %}</a></li>
             <li><a href="{% url calendar_today %}">{% trans "Calendar" %}</a></li>
-            {% else %}
-            <li><a href="{% url login %}">{% trans "Log in" %}</a></li>
-            {% endif %}
           </ul>
         </nav>
+        {% endif %}
+
       </header>
 
       <div class="content">

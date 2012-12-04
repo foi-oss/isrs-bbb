@@ -214,7 +214,7 @@ def create_meeting(request):
             meeting.agenda = data.get('agenda')
             meeting.user = request.user
             meeting.save()
-            #url = meeting.start()
+            url = meeting.start()
             #msg = _('Successfully created meeting %s') % meeting.name
             msg = _('Successfully schdulered meeting %s') % meeting.name
             messages.success(request, msg)
