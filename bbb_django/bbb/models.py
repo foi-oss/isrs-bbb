@@ -90,7 +90,7 @@ class Meeting(models.Model):
 
   @classmethod
   def get_meetings(self):
-    result = self.api_call('getMeetings', {'random': time.time()})
+    result = self.api_call('getMeetings', {'random': random.randint(0, 4444)})
     if result == None:
       return 'error'
 
@@ -113,7 +113,7 @@ class Meeting(models.Model):
     return d
 
   def start(self):
-    voicebridge = 70000 + random.randint(0,9999)
+    voicebridge = 70000 + random.randint(0, 9999)
     result = self.api_call('create', {
       'name':        self.name.encode('utf8'),
       'meetingID':   self.id,
@@ -141,29 +141,29 @@ class Meeting(models.Model):
 
     return "%s/join?%s&checksum=%s" % (settings.BBB_API_URL, query, checksum)
 
-class CreateForm(forms.Form):
-  name = forms.CharField(label=_('meeting name'))
-  attendee_password   = forms.CharField(label=_('attendee password'),
-                                        widget=forms.PasswordInput(render_value=False))
-  moderator_password  = forms.CharField(label=_('moderator password'),
-                                         widget=forms.PasswordInput(render_value=False))
-  welcome             = forms.CharField(label=_('welcome message'), initial=_('Welcome!'))
-  record              = forms.BooleanField(label=_('record'), initial=False, required=False)
-  duration            = forms.ChoiceField(label=_('duration'), choices=MEETING_DURATION)
-  start_time          = forms.DateTimeField(label=_('start time'), widget=widgets.AdminSplitDateTime())
-  agenda              = forms.CharField(label=_('agenda'), required=False, widget=forms.Textarea)
- 
-  def clean(self):
-    data = self.cleaned_data
+  class CreateForm(forms.Form):
+    name = forms.CharField(label=_('meeting name'))
+    attendee_password   = forms.CharField(label=_('attendee password'),
+                                          widget=forms.PasswordInput(render_value=False))
+    moderator_password  = forms.CharField(label=_('moderator password'),
+                                           widget=forms.PasswordInput(render_value=False))
+    welcome             = forms.CharField(label=_('welcome message'), initial=_('Welcome!'))
+    record              = forms.BooleanField(label=_('record'), initial=False, required=False)
+    duration            = forms.ChoiceField(label=_('duration'), choices=MEETING_DURATION)
+    start_time          = forms.DateTimeField(label=_('start time'), widget=widgets.AdminSplitDateTime())
+    agenda              = forms.CharField(label=_('agenda'), required=False, widget=forms.Textarea)
+   
+    def clean(self):
+      data = self.cleaned_data
 
-    # TODO: should check for errors before modifying
-    #data['meeting_id'] = data.get('name')
+      # TODO: should check for errors before modifying
+      #data['meeting_id'] = data.get('name')
 
-    #if Meeting.objects.filter(name = data.get('name')):
-    #    raise forms.ValidationError("That meeting name is already in use")
-    return data
+      #if Meeting.objects.filter(name = data.get('name')):
+      #    raise forms.ValidationError("That meeting name is already in use")
+      return data
 
-class JoinForm(forms.Form):
-  name = forms.CharField(label=_("Your name"))
-  password = forms.CharField(label=_('password'),
-                             widget=forms.PasswordInput(render_value=False))
+  class JoinForm(forms.Form):
+    name = forms.CharField(label=_("Your name"))
+    password = forms.CharField(label=_('password'),
+                               widget=forms.PasswordInput(render_value=False))
