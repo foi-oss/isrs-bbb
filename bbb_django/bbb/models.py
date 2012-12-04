@@ -69,7 +69,7 @@ class Meeting(models.Model):
   def end_meeting(self, meeting_id, password):
     result = self.api_call('end', {'meetingID': meeting_id,
                                    'password': password})
-    return 'error' if result == None
+    return 'error' if result == None else True
 
   @classmethod
   def meeting_info(self, meeting_id, password):
