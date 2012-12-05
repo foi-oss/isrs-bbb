@@ -61,7 +61,7 @@ a:hover {
 h1 {
   text-indent: -9999px;
   display: block;
-  background: url(/static/img/logo.png) no-repeat top left;
+  background: url(../img/logo.png) no-repeat top left;
   height: 156px;
   width: 500px;
   margin: 0 auto;
