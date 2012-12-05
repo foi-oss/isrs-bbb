@@ -20,7 +20,7 @@
 		{% endif %}
 	    {% else %}
 	       <span class="status notrunning">{% trans "Not started" %}</span>
-               <form method="GET" action="{% url export meeting.meeting_id%}"><input type="submit" value="{% trans "Calendar export" %}"/></form>
+               <!-- <form method="GET" action="{% url export meeting.meeting_id%}"><input type="submit" value="{% trans "Calendar export" %}"/></form> -->
 	       <form method="GET" action="{% url join meeting.meeting_id%}"><input type="submit" value="{% trans "Start" %}"/></form>
 	    {% endif %}
             </span>
