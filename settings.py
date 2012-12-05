@@ -4,6 +4,9 @@ import os
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+USE_X_FORWARDED_HOST = True
+FORCE_SCRIPT_NAME = '/bbb'
+
 PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
 
 ADMINS = (
@@ -90,8 +93,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 LOGIN_URL = '/login'
-LOGIN_REDIRECT_URL = '/'
-
+LOGIN_REDIRECT_URL = '/bbb'
 
 ROOT_URLCONF = 'bbb.urls'
 
