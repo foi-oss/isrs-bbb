@@ -194,6 +194,12 @@ input[type='text'], input[type='password'] {
   padding: 5px 0 !important;
 }
 
+footer {
+  font-size: 0.8em;
+  text-align: center;
+  margin: 30px auto;
+}
+
 /**/
 tr {
   padding: 4px 0;
