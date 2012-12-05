@@ -76,7 +76,7 @@ h2 {
   letter-spacing: -0.03em;
 }
 .container {
-  width: 500px;
+  width: 550px;
   margin: 0 auto;
 }
 
@@ -152,10 +152,9 @@ ul.large li table th {
 }
 
 .content {
-  background: #fff;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #ddd;
+  width: 400px;
+  margin: 0 auto 10px auto;
+  border: 1px solid #ddd;
 }
 form {display: inline;}
 

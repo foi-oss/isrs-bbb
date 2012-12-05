@@ -7,7 +7,7 @@
 {% block content %}
 <form action="" method="POST" id="join_meeting">
 {% csrf_token %}
-<h2>{% trans "Join presentation" %} '{{ meeting_name }}'</h2>
+<h2>{% trans "Join presentation" %} &#8216;{{ meeting_name }}&#8217;</h2>
 <p>Invite others to this presentation via the following link:<br/>
 <a href="/meeting/{{ meeting_id }}/join">http://studentresearchsymposium.com/meeting/{{ meeting_id }}/join</a>
 </p>
@@ -17,8 +17,17 @@
         <th></th>
         <td>
             <input type="submit" value="{% trans "Join" %}">
+            <small><a href="#modernator" id="toggle_modernator">Are you a modernator?</a></small>
         </td>
     </tr>
 </table>
 </form>
+<script>
+$(function () {
+  $('#modernator').on('click', function () {
+    $('#id_password').parent().parent().show();
+    $(this).hide();
+  });
+});
+</script>
 {% endblock %}

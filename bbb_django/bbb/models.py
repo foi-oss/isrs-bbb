@@ -146,7 +146,8 @@ class Meeting(models.Model):
   class CreateForm(forms.Form):
     name = forms.CharField(label=_('meeting name'))
     attendee_password   = forms.CharField(label=_('attendee password'),
-                                          widget=forms.PasswordInput(render_value=False))
+                                          widget=forms.PasswordInput(render_value=False),
+                                          required=False)
     moderator_password  = forms.CharField(label=_('moderator password'),
                                            widget=forms.PasswordInput(render_value=False))
     welcome             = forms.CharField(label=_('welcome message'), initial=_('Welcome!'))
@@ -167,5 +168,6 @@ class Meeting(models.Model):
 
   class JoinForm(forms.Form):
     name = forms.CharField(label=_("Your name"))
-    password = forms.CharField(label=_('Password'),
-                               widget=forms.PasswordInput(render_value=False))
+    password = forms.CharField(label=_("Password"),
+                               widget=forms.PasswordInput(render_value=False),
+                               required=False)
