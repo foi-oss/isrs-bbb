@@ -24,8 +24,10 @@
 </form>
 <script>
 $(function () {
+  var pw_field = $('#id_password').parent().parent();
+  pw_field.hide();
   $('#modernator').on('click', function () {
-    $('#id_password').parent().parent().show();
+    pw_field.show();
     $(this).hide();
   });
 });
