@@ -146,8 +146,7 @@ class Meeting(models.Model):
   class CreateForm(forms.Form):
     name = forms.CharField(label=_('meeting name'))
     attendee_password   = forms.CharField(label=_('attendee password'),
-                                          widget=forms.PasswordInput(render_value=False),
-                                          required=False)
+                                          widget=forms.PasswordInput(render_value=False))
     moderator_password  = forms.CharField(label=_('moderator password'),
                                            widget=forms.PasswordInput(render_value=False))
     welcome             = forms.CharField(label=_('welcome message'), initial=_('Welcome!'))

@@ -161,6 +161,8 @@ def join_meeting(request, meeting_id):
                 meeting.started = True
                 meeting.save()
                 url = meeting.start()
+            else:
+                password = meeting.attendee_password
 
             return HttpResponseRedirect(Meeting.join_url(meeting_id, name, password))
     else:
