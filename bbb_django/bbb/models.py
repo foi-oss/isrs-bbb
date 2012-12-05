@@ -45,7 +45,7 @@ class Meeting(models.Model):
   @classmethod
   def api_call(self, call, query):
     query['checksum'] = sha1(call + urlencode(query) + settings.SALT).hexdigest()
-    print 'BBB API REQUEST', call, params
+    print 'BBB API REQUEST', call, query
     rq = requests.get(settings.BBB_API_URL + "/" + call, params=query)
     print 'BBB API RESP', rq.ok
     
