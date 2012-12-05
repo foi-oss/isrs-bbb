@@ -75,7 +75,7 @@ class Meeting(models.Model):
 
   @classmethod
   def meeting_info(self, meeting_id, password):
-    result = self.api_call('getMeetingInfo', {'meetingID': meeting_id,
+    r = self.api_call('getMeetingInfo', {'meetingID': meeting_id,
                                               'password': password})
     if r == None:
       return None
