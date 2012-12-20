@@ -141,7 +141,7 @@ class Meeting(models.Model):
     })
     checksum = sha1("join" + query + settings.SALT).hexdigest()
 
-    return "%s/join?%s&checksum=%s" % (settings.BBB_API_URL, query, checksum)
+    return "%s/join?%s&checksum=%s" % (settings.BBB_PUBLIC_URL, query, checksum)
 
   class CreateForm(forms.Form):
     name = forms.CharField(label=_('meeting name'))
