@@ -63,9 +63,9 @@ class Meeting(models.Model):
   def is_running(self):
     result = self.api_call('isMeetingRunning', {'meetingID': self.id})
     if result:
-      return result.find('running').text
+      return result.find('running').text == 'true'
     else:
-      return 'error'
+      return False
 
   @classmethod
   def end_meeting(self, meeting_id, password):
@@ -123,7 +123,7 @@ class Meeting(models.Model):
       'moderatorPW': self.moderator_password,
       'voiceBridge': voicebridge,
       'welcome':     self.welcome.encode('utf8'),
-      'record':      self.record,
+      'record':      self.record
       #{'duration', self.duration),
     })
 

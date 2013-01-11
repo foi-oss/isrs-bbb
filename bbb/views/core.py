@@ -160,7 +160,7 @@ def join_meeting(request, meeting_id):
                 #meeting.logout_url = request.build_absolute_uri(reverse('delete',args=[meeting_id, password]))
                 meeting.started = True
                 meeting.save()
-                url = meeting.start()
+                meeting.start()
             else:
                 password = meeting.attendee_password
 
