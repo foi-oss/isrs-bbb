@@ -9,14 +9,14 @@
 {% csrf_token %}
 <h2>{% trans "Join presentation" %} &#8216;{{ meeting_name }}&#8217;</h2>
 <p>Invite others to this presentation via the following link:<br/>
-<a href="/bbb/meeting/{{ meeting_id }}/join">http://bbb.studentresearchsymposium.com/bbb/meeting/{{ meeting_id }}/join</a>
+<a href="{{ meeting_share_url }}">{{ meeting_share_url }}</a>
 </p>
 <table>
     {{form}}
     <tr>
         <th></th>
         <td>
-            <input type="submit" value="{% trans "Join" %}">
+            <input type="submit" value="Join">
             <small><a href="#moderator" id="toggle_moderator">Are you a moderator?</a></small>
         </td>
     </tr>

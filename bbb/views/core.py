@@ -18,6 +18,10 @@ import hashlib
 from bbb.models import *
 from bbb.webcalendar import *
 
+import bitly_api
+
+bitly = bitly_api.Connection(access_token='519dc2a8f8e736fca4accd99e7bce356fcdc1fb9')
+
 def home_page(request):
     context = RequestContext(request, {
     })
@@ -27,7 +31,7 @@ def home_page(request):
 def export_meeting(request, meeting_id):
     meeting = Meeting.objects.get(id=meeting_id)
     cal = Calendar()
-    cal.add('prodid', '-//commuxi Corporation//bbbforum release//')
+    cal.add('prodid', '-//International Student Research Symposium//studentresearchsymposium.com//')
     cal.add('version', '2.0')
     event = Event()
     event.add('summary', meeting.name)
@@ -169,10 +173,12 @@ def join_meeting(request, meeting_id):
         form = form_class()
 
     meeting = Meeting.objects.get(id=meeting_id)
+    short = bitly.shorten("http://bbb.studentresearchsymposium.com/bbb/meeting/%d/join" % meeting_id)
     context = RequestContext(request, {
         'form': form,
         'meeting_name': meeting.name,
-        'meeting_id': meeting_id
+        'meeting_id': meeting_id,
+        'meeting_share_url': short['url']
     })
 
     return render_to_response('join.html', context)
