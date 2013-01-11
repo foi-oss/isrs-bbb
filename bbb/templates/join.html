@@ -9,7 +9,7 @@
 {% csrf_token %}
 <h2>{% trans "Join presentation" %} &#8216;{{ meeting_name }}&#8217;</h2>
 <p>Invite others to this presentation via the following link:<br/>
-<a href="/meeting/{{ meeting_id }}/join">http://studentresearchsymposium.com/meeting/{{ meeting_id }}/join</a>
+<a href="/bbb/meeting/{{ meeting_id }}/join">http://bbb.studentresearchsymposium.com/bbb/meeting/{{ meeting_id }}/join</a>
 </p>
 <table>
     {{form}}
@@ -17,7 +17,7 @@
         <th></th>
         <td>
             <input type="submit" value="{% trans "Join" %}">
-            <small><a href="#modernator" id="toggle_modernator">Are you a modernator?</a></small>
+            <small><a href="#moderator" id="toggle_moderator">Are you a moderator?</a></small>
         </td>
     </tr>
 </table>
@@ -26,7 +26,7 @@
 $(function () {
   var pw_field = $('#id_password').parent().parent();
   pw_field.hide();
-  $('#toggle_modernator').on('click', function () {
+  $('#toggle_moderator').on('click', function () {
     pw_field.show();
     $(this).hide();
   });
