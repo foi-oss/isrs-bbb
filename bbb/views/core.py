@@ -173,7 +173,7 @@ def join_meeting(request, meeting_id):
         form = form_class()
 
     meeting = Meeting.objects.get(id=meeting_id)
-    short = bitly.shorten("http://bbb.studentresearchsymposium.com/bbb/meeting/%d/join" % meeting_id)
+    short = bitly.shorten("http://bbb.studentresearchsymposium.com/bbb/meeting/%s/join" % meeting_id)
     context = RequestContext(request, {
         'form': form,
         'meeting_name': meeting.name,
