@@ -21,6 +21,7 @@ from bbb.webcalendar import *
 import bitly_api
 
 bitly = bitly_api.Connection(access_token='519dc2a8f8e736fca4accd99e7bce356fcdc1fb9')
+BITLY_CACHE = {}
 
 def home_page(request):
     context = RequestContext(request, {
@@ -148,6 +149,7 @@ def meetings(request):
     return render_to_response('meetings.html', context)
 
 def join_meeting(request, meeting_id):
+    global BITLY_CACHE
     form_class = Meeting.JoinForm
 
     if request.method == "POST":
@@ -173,12 +175,20 @@ def join_meeting(request, meeting_id):
         form = form_class()
 
     meeting = Meeting.objects.get(id=meeting_id)
-    short = bitly.shorten("http://bbb.studentresearchsymposium.com/bbb/meeting/%s/join" % meeting_id)
+    short = ""
+
+    if meeting_id in BITLY_CACHE:
+        short = BITLY_CACHE[meeting_id]
+    else:
+        meeting_url = "http://bbb.studentresearchsymposium.com/bbb/meeting/%s/join" % meeting_id
+        short = bitly.shorten(meeting_url)
+        BITLY_CACHE[meeting_id] = short['url']
+
     context = RequestContext(request, {
         'form': form,
         'meeting_name': meeting.name,
         'meeting_id': meeting_id,
-        'meeting_share_url': short['url']
+        'meeting_share_url': short
     })
 
     return render_to_response('join.html', context)
