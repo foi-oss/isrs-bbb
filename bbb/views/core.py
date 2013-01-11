@@ -181,8 +181,8 @@ def join_meeting(request, meeting_id):
         short = BITLY_CACHE[meeting_id]
     else:
         meeting_url = "http://bbb.studentresearchsymposium.com/bbb/meeting/%s/join" % meeting_id
-        short = bitly.shorten(meeting_url)
-        BITLY_CACHE[meeting_id] = short['url']
+        short = bitly.shorten(meeting_url)['url']
+        BITLY_CACHE[meeting_id] = short
 
     context = RequestContext(request, {
         'form': form,
